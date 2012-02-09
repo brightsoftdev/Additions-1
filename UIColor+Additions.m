@@ -12,6 +12,9 @@
 
 + (UIColor *)fromHexString:(NSString *)inColorString
 {
+    if([inColorString length] == 3)
+        inColorString = [inColorString stringByAppendingString:inColorString];
+    
 	UIColor *result = nil;
 	unsigned int colorCode = 0;
 	unsigned char redByte, greenByte, blueByte;

@@ -23,4 +23,6 @@
 #import "NSFetchRequest+Additions.h"
 #import "NSManagedObject+Additions.h"
 #import "Constants.h"
-
+#import "NSFetchRequest+Additions.h"
+#import "NSManagedObject+Additions.h"
+#import "NSManagedObjectContext+Additions.h"

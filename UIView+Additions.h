@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef void(^UIViewDrawRect)(CGRect rect);
+typedef void(^UIViewDrawRect)(UIView *view, CGRect rect);
 
 enum {
     UIViewRoundedCornerNone = 0,

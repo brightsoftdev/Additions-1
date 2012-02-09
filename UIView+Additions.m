@@ -28,7 +28,7 @@
 - (void)drawRect:(CGRect)rect
 {
     if(block)
-        block(rect);
+        block(self, rect);
 }
 
 @end

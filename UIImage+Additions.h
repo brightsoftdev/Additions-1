@@ -20,7 +20,6 @@
 + (UIImage *)ratioScale:(UIImage *)image toRect:(CGRect)frame fromSize:(CGSize)size;
 + (UIImage *)fillImage:(UIImage *)image withColor:(UIColor *)color;
 + (UIImage *)imageFromURL:(NSString *)urlString;
-
 - (UIImage *)resizeTo:(CGSize)targetSize;
 - (UIImage *)fillImageWithColor:(UIColor *)color;
 + (UIImage *)imageNamed:(NSString *)name withShadowColor:(UIColor *)color;

@@ -9,6 +9,16 @@
 #define AND &&
 #define OR  ||
 
+#define RED             [UIColor redColor]
+#define BLACK           [UIColor blackColor]
+#define BLUE            [UIColor blueColor]
+#define GREEN           [UIColor greenColor]
+#define YELLOW          [UIColor yellowColor]
+#define GRAY            [UIColor grayColor]
+#define LIGHTGRAY       [UIColor lightGrayColor]
+#define CLEAR           [UIColor clearColor]
+#define HEX_COLOR(hex)  [UIColor fromHexString:hex]
+
 /* System Shorthand */
 
 #define APP_DELEGATE(delegateName)    ((delegateName *)[[UIApplication sharedApplication] delegate])
@@ -50,8 +60,8 @@ CGRectMake((IS_LANDSCAPE)? SCREEN_BOUNDS.origin.y : SCREEN_BOUNDS.origin.x, \
 CGColorRef topColor		= [tC CGColor];                                                                                         \
 CGColorRef bottomColor	= [bC CGColor];                                                                                         \
 CGFloat locations[]		= {0, 1};                                                                                               \
-NSArray *gradientColors	= [NSArray arrayWithObjects:(id)topColor, (id)bottomColor, nil];                                        \
-CGGradientRef gradient	= CGGradientCreateWithColors(CGColorGetColorSpace(topColor), (CFArrayRef)gradientColors, locations);	\
+NSArray *gradientColors	= [NSArray arrayWithObjects:(__bridge id)topColor, (__bridge id)bottomColor, nil];                                        \
+CGGradientRef gradient	= CGGradientCreateWithColors(CGColorGetColorSpace(topColor), (__bridge CFArrayRef)gradientColors, locations);	\
 CGPoint top				= CGPointMake(CGRectGetMidX(withRect), withRect.origin.y);                                              \
 CGPoint btm				= CGPointMake(CGRectGetMidX(withRect), CGRectGetMaxY(withRect));                                        \
 CGContextRef context	= UIGraphicsGetCurrentContext();																		\
@@ -61,8 +71,8 @@ CGContextDrawLinearGradient(context, gradient, top, btm, 0); CGGradientRelease(g
 CGColorRef leftColor	= [lc CGColor];                                                                                         \
 CGColorRef rightColor	= [rc CGColor];                                                                                         \
 CGFloat locations[]		= {0, 1};																								\
-NSArray *gradientColors	= [NSArray arrayWithObjects:(id)leftColor, (id)rightColor, nil];										\
-CGGradientRef gradient	= CGGradientCreateWithColors(CGColorGetColorSpace(leftColor), (CFArrayRef)gradientColors, locations);	\
+NSArray *gradientColors	= [NSArray arrayWithObjects:(__bridge id)leftColor, (__bridge id)rightColor, nil];										\
+CGGradientRef gradient	= CGGradientCreateWithColors(CGColorGetColorSpace(leftColor), (__bridge CFArrayRef)gradientColors, locations);	\
 CGPoint left			= CGPointMake(CGRectGetMinX(withRect), CGRectGetMinY(withRect));                                        \
 CGPoint right			= CGPointMake(CGRectGetMaxX(withRect), CGRectGetMinY(withRect));                                        \
 CGContextRef context	= UIGraphicsGetCurrentContext();																		\

@@ -31,7 +31,7 @@
 	targetImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	
-	if(targetImage == nil) NSLog(@"could not scale image");
+	//if(targetImage == nil) NSLog(@"could not scale image");
     
 	return targetImage;
 }
@@ -58,7 +58,7 @@
 	targetImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	
-	if(targetImage == nil) NSLog(@"could not scale image");
+	//if(targetImage == nil) NSLog(@"could not scale image");
 	
 	return targetImage;
 	

@@ -4,12 +4,69 @@
 //  Created by Wess Cope on 5/18/11.
 //  Copyright 2012. All rights reserved.
 //
-
+#import <objc/runtime.h>
 #import <QuartzCore/QuartzCore.h>
 #import "UIButton+Additions.h"
 
 
 @implementation UIButton(Additions)
+static char BG_PROPERTY_KEY;
+@dynamic backgrounds;
+
+- (void)setBackgrounds:(NSMutableDictionary *)backgrounds
+{
+    objc_setAssociatedObject(self, &BG_PROPERTY_KEY, backgrounds, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMutableDictionary *)backgrounds
+{
+    return (NSMutableDictionary *)objc_getAssociatedObject(self, &BG_PROPERTY_KEY);
+}
+
+
+- (void) setBackgroundColor:(UIColor *)bgColor forState:(UIControlState)state
+{
+    if([self backgrounds] == NULL)
+    {
+        NSMutableDictionary *tmpDict = [[NSMutableDictionary alloc] init];
+        [self setBackgrounds:tmpDict];
+    }
+    
+    [[self backgrounds] setObject:bgColor forKey:[NSNumber numberWithInt:state]];
+    
+    if(!self.backgroundColor)
+        self.backgroundColor = bgColor;
+}
+
+- (void)animateBackgroundToColor:(NSNumber *)key
+{
+    UIColor *background = [[self backgrounds] objectForKey:key];
+    if(background)
+    {
+        [UIView animateWithDuration:0.1f animations:^{
+            self.backgroundColor = background;
+        }];
+    }
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    [self animateBackgroundToColor:[NSNumber numberWithInt:UIControlStateHighlighted]];
+    
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesCancelled:touches withEvent:event];
+    [self animateBackgroundToColor:[NSNumber numberWithInt:UIControlStateNormal]];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    [self animateBackgroundToColor:[NSNumber numberWithInt:UIControlStateNormal]];
+}
 
 + (UIButton *) withColor:(UIColor *)color
 {
